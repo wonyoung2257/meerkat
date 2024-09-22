@@ -27,7 +27,7 @@ const ProjectCard: React.FC<PRD> = ({
         <div className="flex gap-10 justify-between items-start w-full">
           <div className="flex flex-col whitespace-nowrap w-[75px]">
             <time className="text-sm font-medium text-gray-400">
-              {send_at.toLocaleDateString("ko-KR")}
+              {new Date(send_at).toLocaleDateString("ko-KR")}
             </time>
             <div className="mt-1.5 text-base font-semibold text-neutral-700">
               {receiver}
