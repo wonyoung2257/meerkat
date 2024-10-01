@@ -1,9 +1,9 @@
 import React from "react";
 import { getClient } from "@/app/utils/supabase/server";
 import Header from "./Header";
-import ProjectCard from "../ProjectCard/ProjectCard";
 import TabNavigation from "../TabNavigation/TabNavigation";
 import UserProfile from "../UserProfile/UserProfile";
+import { ProjectCards } from "../ProjectCard/ProjectCards";
 
 const Dashboard: React.FC = async () => {
   const supabase = getClient();
@@ -12,7 +12,6 @@ const Dashboard: React.FC = async () => {
   const { data: user, error: userError } = await supabase.auth.getUser();
 
   if (userError) {
-    console.error(userError);
     return (
       <div>
         사용자 정보를 가져오는 중 오류가 발생했습니다: {userError.message}
@@ -27,7 +26,6 @@ const Dashboard: React.FC = async () => {
     .eq("receiver", user.user?.email);
 
   if (projectsError) {
-    console.error(projectsError);
     return (
       <div>
         프로젝트 데이터를 가져오는 중 오류가 발생했습니다:{" "}
@@ -47,11 +45,7 @@ const Dashboard: React.FC = async () => {
           </h2>
           <div className="flex z-0 flex-col mt-10 w-full max-md:max-w-full">
             <TabNavigation />
-            <div className="flex flex-wrap gap-8 items-center mt-8 w-full max-md:max-w-full">
-              {projects.map((project) => (
-                <ProjectCard key={project.id} {...project} />
-              ))}
-            </div>
+            <ProjectCards projects={projects} />
           </div>
         </section>
       </main>

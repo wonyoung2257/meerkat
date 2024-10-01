@@ -9,6 +9,7 @@ import React from "react";
 type UserProfileProps = {
   user: User;
 };
+
 const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
   const supabase = getClientSideClient();
   const router = useRouter();
