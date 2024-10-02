@@ -6,4 +6,7 @@ export type PRD = {
   prd_url: string;
   checked: boolean;
   complated: boolean;
+
+  update_at: Date;
+  sender: string;
 };

@@ -23,7 +23,8 @@ const Dashboard: React.FC = async () => {
   const { data: projects, error: projectsError } = await supabase
     .from("prd")
     .select("*")
-    .eq("receiver", user.user?.email);
+    .eq("receiver", user.user?.email)
+    .order("send_at", { ascending: false });
 
   if (projectsError) {
     return (
