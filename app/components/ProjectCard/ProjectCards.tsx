@@ -6,7 +6,7 @@ import { useQueryState } from "nuqs";
 type Project = PRD;
 
 export const ProjectCards = ({ projects }: { projects: Project[] }) => {
-  const [selectedTab] = useQueryState("tab");
+  const [selectedTab] = useQueryState("tab", { defaultValue: "all" });
   const filteredProjects = projects.filter((project) => {
     if (selectedTab === "all") return true;
     if (selectedTab === "before") return !project.checked;
