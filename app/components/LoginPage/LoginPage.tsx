@@ -14,6 +14,7 @@ const LoginPage: React.FC = () => {
           <h1 className="text-lg font-extrabold text-neutral-900">meerkat</h1>
           <p className="mt-3 text-sm font-semibold text-gray-500">
             행복한 협업을 만들어요
+            {process.env.NEXT_PUBLIC_SITE_URL}
           </p>
         </header>
         <img
