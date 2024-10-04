@@ -4,6 +4,7 @@ import { useQueryState } from "nuqs";
 const TAB_STATE = {
   ALL: "all",
   BEFORE: "before",
+  CHECKED: "checked",
   COMPLETED: "completed",
 } as const;
 
@@ -23,12 +24,12 @@ const TabNavigation = () => {
         전체
       </button>
       <button
-        onClick={() => setSelectedTab(TAB_STATE.BEFORE)}
+        onClick={() => setSelectedTab(TAB_STATE.CHECKED)}
         className={`flex flex-1 shrink gap-0.5 justify-center items-start self-stretch p-4 my-auto bg-white basis-0 min-w-[240px] ${
-          selectedTab === TAB_STATE.BEFORE ? "border-b-2 border-zinc-900" : ""
+          selectedTab === TAB_STATE.CHECKED ? "border-b-2 border-zinc-900" : ""
         }`}
       >
-        <span>확인 전</span>
+        <span>확인 완료</span>
         <span className="flex shrink-0 w-1.5 h-1.5 bg-rose-500 rounded-[99px]" />
       </button>
       <button

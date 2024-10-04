@@ -1,4 +1,5 @@
-import Dashboard from "../components/DetailPage/DetailComponent";
+import Dashboard from "@/app/components/DetailPage/DetailComponent";
+
 
 const DashboardPage = async () => {
   return <Dashboard />;

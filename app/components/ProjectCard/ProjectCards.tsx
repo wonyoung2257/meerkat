@@ -1,9 +1,9 @@
 "use client";
 import { PRD } from "@/app/_types/prd.type";
-import ProjectCard from "./ProjectCard";
 import { useQueryState } from "nuqs";
 import { useState } from "react";
 import { getClientSideClient } from "@/app/utils/supabase/client";
+import { PrdCard } from "../PrdCard/PrdCard";
 
 type Project = PRD;
 
@@ -19,7 +19,7 @@ export const ProjectCards = ({
   const [selectedTab] = useQueryState("tab", { defaultValue: "all" });
   const filteredProjects = projects.filter((project) => {
     if (selectedTab === "all") return true;
-    if (selectedTab === "before") return !project.checked;
+    if (selectedTab === "checked") return project.checked && !project.complated;
     if (selectedTab === "completed") return project.complated;
     return false;
   });
@@ -54,7 +54,7 @@ export const ProjectCards = ({
         </div>
       ) : (
         filteredProjects.map((project: Project) => (
-          <ProjectCard
+          <PrdCard
             key={project.id}
             {...project}
             handleUpdateProject={handleUpdateProject}
