@@ -5,7 +5,7 @@ export type PRD = {
   title: string;
   prd_url: string;
   checked: boolean;
-  complated: boolean;
+  completed: boolean;
   update_at: Date;
   sender: string;
   eta: Date;

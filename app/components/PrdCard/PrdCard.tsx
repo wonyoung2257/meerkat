@@ -17,17 +17,17 @@ export function PrdCard({
   title,
   prd_url,
   checked,
-  complated,
+  completed,
   eta,
   handleUpdateProject,
 }: PrdCardProps) {
   const [isHover, setIsHover] = useState(false);
 
   const supabase = getClientSideClient();
-  const cardClass = complated
+  const cardClass = completed
     ? "bg-slate-100"
     : "bg-white border border-solid border-slate-200";
-  const statusClass = complated
+  const statusClass = completed
     ? "bg-slate-200 text-neutral-500"
     : "text-rose-500 bg-rose-50";
 
@@ -55,7 +55,7 @@ export function PrdCard({
   const handleButtonClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (
       !confirm(
-        complated
+        completed
           ? "이 문서를 제작 완료되지 않는 상태로 변경할까요?"
           : "이 문서를 제작 완료 상태로 변경할까요?"
       )
@@ -67,7 +67,7 @@ export function PrdCard({
     try {
       const { data, error } = await supabase
         .from("prd")
-        .update({ complated: !complated })
+        .update({ completed: !completed })
         .eq("id", id);
 
       if (error) {
@@ -98,14 +98,14 @@ export function PrdCard({
               확인 안함
             </div>
           )}
-          {checked && !isHover && !complated && (
+          {checked && !isHover && !completed && (
             <div
               className={`h-[26px] gap-2.5 self-stretch px-2 py-1 text-sm font-semibold rounded-md bg-slate-200 text-neutral-500`}
             >
               확인 완료
             </div>
           )}
-          {checked && isHover && !complated && (
+          {checked && isHover && !completed && (
             <button
               onClick={handleButtonClick}
               className={`h-[26px] gap-1 self-stretch px-2 py-1 text-sm font-semibold rounded-md bg-slate-200 text-neutral-500 flex items-center`}
@@ -113,7 +113,7 @@ export function PrdCard({
               <CheckIcon className="w-4 h-4 text-[#5F666B]" /> 제작 완료
             </button>
           )}
-          {complated && !isHover && (
+          {completed && !isHover && (
             <button
               onClick={handleButtonClick}
               className={`h-[26px] gap-1 self-stretch px-2 py-1 text-sm font-semibold rounded-md bg-slate-200 text-neutral-500 flex items-center`}
@@ -121,7 +121,7 @@ export function PrdCard({
               <CheckIcon className="w-4 h-4 text-[#5F666B]" /> 제작 완료
             </button>
           )}
-          {complated && isHover && (
+          {completed && isHover && (
             <button
               onClick={handleButtonClick}
               className={`h-[26px] gap-1 self-stretch px-2 py-1 text-sm font-semibold rounded-md ${statusClass} flex items-center`}

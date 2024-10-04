@@ -14,18 +14,18 @@ const ProjectCard = ({
   title,
   prd_url,
   checked,
-  complated,
+  completed,
   // eta,
   handleUpdateProject,
 }: ProjectCardProps) => {
   const [isHover, setIsHover] = useState(false);
-  console.log(checked, complated);
+  console.log(checked, completed);
 
   const supabase = getClientSideClient();
-  const cardClass = complated
+  const cardClass = completed
     ? "bg-slate-100"
     : "bg-white border border-solid border-slate-200";
-  const statusClass = complated
+  const statusClass = completed
     ? "bg-slate-200 text-neutral-500"
     : "text-rose-500 bg-rose-50";
 
@@ -56,7 +56,7 @@ const ProjectCard = ({
     try {
       const { data, error } = await supabase
         .from("prd")
-        .update({ complated: !complated })
+        .update({ completed: !completed })
         .eq("id", id);
 
       if (error) {
@@ -100,7 +100,7 @@ const ProjectCard = ({
               확인후
             </div>
           )}
-          {!complated && isHover && (
+          {!completed && isHover && (
             <button
               onClick={handleButtonClick}
               className={`h-[26px] gap-1 self-stretch px-2 py-1 text-sm font-semibold rounded-md bg-slate-200 text-neutral-500 flex items-center`}
@@ -108,14 +108,14 @@ const ProjectCard = ({
               <CheckIcon className="w-4 h-4 text-[#5F666B]" /> 제작 완료함
             </button>
           )}
-          {complated && !isHover && (
+          {completed && !isHover && (
             <div
               className={`h-[26px] gap-2.5 self-stretch px-2 py-1 text-sm font-semibold rounded-md ${statusClass}`}
             >
               제작 완료
             </div>
           )}
-          {complated && isHover && (
+          {completed && isHover && (
             <button
               onClick={handleButtonClick}
               className={`h-[26px] gap-1 self-stretch px-2 py-1 text-sm font-semibold rounded-md ${statusClass} flex items-center`}

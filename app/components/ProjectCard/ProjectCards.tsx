@@ -19,8 +19,8 @@ export const ProjectCards = ({
   const [selectedTab] = useQueryState("tab", { defaultValue: "all" });
   const filteredProjects = projects.filter((project) => {
     if (selectedTab === "all") return true;
-    if (selectedTab === "checked") return project.checked && !project.complated;
-    if (selectedTab === "completed") return project.complated;
+    if (selectedTab === "checked") return project.checked && !project.completed;
+    if (selectedTab === "completed") return project.completed;
     return false;
   });
 
