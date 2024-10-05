@@ -4,6 +4,7 @@ import Header from "./Header";
 import TabNavigation from "../TabNavigation/TabNavigation";
 import UserProfile from "../UserProfile/UserProfile";
 import { ProjectCards } from "../ProjectCard/ProjectCards";
+import Footer from "../Footer/Footer";
 
 const Dashboard: React.FC = async () => {
   const supabase = getClient();
@@ -49,6 +50,7 @@ const Dashboard: React.FC = async () => {
             <ProjectCards projects={projects} />
           </div>
         </section>
+        <Footer />
       </main>
     </div>
   );

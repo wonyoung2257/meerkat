@@ -6,8 +6,16 @@ import React from "react";
 const PrivacyNotice: React.FC = () => {
   return (
     <p className="mt-4 text-xs font-medium leading-5 text-gray-500">
-      계속 진행하면 개인정보 처리방침 (링크) 및 서비스 약관 (링크) 에 <br />
-      동의하는 것으로 간주합니다.
+      계속 진행하면{" "}
+      <a
+        href="https://excessive-bread-42f.notion.site/105e7393675480abb1efd89a81053a71?pvs=74"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline"
+      >
+        서비스 약관
+      </a>{" "}
+      에 동의하는 것으로 간주합니다.
     </p>
   );
 };

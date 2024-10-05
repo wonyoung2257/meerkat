@@ -50,7 +50,11 @@ export const ProjectCards = ({
     <div className="flex flex-wrap gap-8 items-center mt-8 w-full max-md:max-w-full">
       {filteredProjects.length === 0 ? (
         <div className="flex justify-center items-center w-full h-full py-10">
-          <p>아직 받은 기획서가 없습니다.</p>
+          <p>
+            {selectedTab === "completed"
+              ? "아직 제작을 완료한 기획서가 없네요!"
+              : "아직 기획서가 없네요!"}
+          </p>
         </div>
       ) : (
         filteredProjects.map((project: Project) => (

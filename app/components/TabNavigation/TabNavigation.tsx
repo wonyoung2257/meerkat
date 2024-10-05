@@ -30,7 +30,7 @@ const TabNavigation = () => {
         }`}
       >
         <span>확인 완료</span>
-        <span className="flex shrink-0 w-1.5 h-1.5 bg-rose-500 rounded-[99px]" />
+        {/* <span className="flex shrink-0 w-1.5 h-1.5 bg-rose-500 rounded-[99px]" /> */}
       </button>
       <button
         onClick={() => setSelectedTab(TAB_STATE.COMPLETED)}

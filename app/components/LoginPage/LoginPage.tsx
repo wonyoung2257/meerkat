@@ -31,9 +31,14 @@ const LoginPage: React.FC = () => {
           <PrivacyNotice />
         </div>
       </section>
-      <footer className="gap-2.5 self-center px-2 py-1 mt-6 text-sm font-medium leading-relaxed text-neutral-500 cursor-pointer">
+      <a
+        href="https://forms.gle/VYVAd6T3Y1YGd5EHA"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="gap-2.5 self-center px-2 py-1 mt-6 text-sm font-medium leading-relaxed text-neutral-500 cursor-pointer"
+      >
         로그인 문의하기
-      </footer>
+      </a>
     </main>
   );
 };

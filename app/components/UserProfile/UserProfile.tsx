@@ -30,7 +30,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
           alt="User profile"
           className="object-contain shrink-0 self-stretch my-auto aspect-square rounded-[53px] w-[52px]"
         />
-        <div className="flex flex-col self-stretch my-auto w-[137px]">
+        <div className="flex flex-col self-stretch my-auto ">
           <div className="text-2xl font-semibold leading-snug text-neutral-900">
             {user.user_metadata.name}
           </div>

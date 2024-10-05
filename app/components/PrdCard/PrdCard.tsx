@@ -25,7 +25,7 @@ export function PrdCard({
 
   const supabase = getClientSideClient();
   const cardClass = completed
-    ? "bg-slate-100"
+    ? "bg-slate-100 opacity-60"
     : "bg-white border border-solid border-slate-200";
   const statusClass = completed
     ? "bg-slate-200 text-neutral-500"
@@ -56,7 +56,7 @@ export function PrdCard({
     if (
       !confirm(
         completed
-          ? "이 문서를 제작 완료되지 않는 상태로 변경할까요?"
+          ? "이 문서를 제작 완료되지 않은 상태로 변경할까요?"
           : "이 문서를 제작 완료 상태로 변경할까요?"
       )
     )
@@ -85,10 +85,10 @@ export function PrdCard({
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onClick={handleClickCheck}
-      className={`flex flex-col grow shrink justify-between self-stretch p-6 my-auto rounded-2xl min-h-[200px] min-w-[240px] shadow-[0px_4px_10px_rgba(0,0,0,0.06)] w-[297px] max-md:px-5 max-w-[370px] cursor-pointer ${cardClass}`}
+      className={`flex flex-col grow shrink justify-between self-stretch p-6 my-auto rounded-2xl min-h-[200px] min-w-[240px] max-h-[200px] shadow-[0px_4px_10px_rgba(0,0,0,0.06)] w-[297px] max-md:px-5 max-w-[370px] cursor-pointer ${cardClass}`}
     >
       <h2 className="text-2xl font-semibold text-neutral-900">{title}</h2>
-      <div className="flex gap-10 justify-between items-end mt-16 w-full">
+      <div className="flex gap-10 justify-between items-end w-full">
         <UserInfo sender={sender} eta={eta} />
         <div>
           {!checked && (
