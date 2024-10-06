@@ -9,7 +9,7 @@ const TipBox: React.FC = () => {
       <span className="self-stretch my-auto font-bold text-orange-500">
         Tip
       </span>
-      <p className="self-stretch my-auto font-medium text-neutral-700">
+      <p className="self-stretch my-auto font-medium text-neutral-700 text-[13px]">
         동료들도 알고 있는{" "}
         <span className="text-orange-500">회사 이메일 계정으로 가입하기</span>를
         추천해
