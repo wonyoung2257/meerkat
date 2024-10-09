@@ -29,6 +29,14 @@ const Footer: React.FC<FooterProps> = () => {
           >
             개인정보 처리방침
           </a>
+          <a
+            href="https://forms.gle/1tofB4tuD9tLxqML7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="gap-2.5 self-stretch px-2 py-1"
+          >
+            서비스 탈퇴 문의
+          </a>
         </nav>
       </div>
       <p className="mt-4 text-xs font-medium">

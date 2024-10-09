@@ -6,6 +6,7 @@ import TipBox from "./TipBox";
 import LoginButton from "./LoginButton";
 import PrivacyNotice from "./PrivacyNotice";
 
+
 const LoginPage: React.FC = () => {
   return (
     <main className="flex flex-col text-center max-w-[500px] ">

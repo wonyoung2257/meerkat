@@ -9,7 +9,6 @@ interface UserInfoProps {
 }
 
 export function UserInfo({ sender, eta }: UserInfoProps) {
-  console.log("🚀 ~ UserInfo ~ eta:", eta);
   return (
     <div className="flex flex-col">
       <div className="flex gap-1.5 items-center self-start text-base font-semibold whitespace-nowrap text-neutral-700">
