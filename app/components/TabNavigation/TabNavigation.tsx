@@ -13,10 +13,18 @@ const TabNavigation = () => {
     defaultValue: TAB_STATE.ALL,
   });
 
+  const handleTabClick = (tab: string) => {
+    setSelectedTab(tab);
+    if (typeof window.gtag === "function") {
+      console.log("tab_click", tab);
+      window.gtag("event", "tab_click", { tab });
+    }
+  };
+
   return (
     <nav className="flex overflow-hidden flex-wrap items-center w-full text-lg font-semibold text-center text-gray-500 border-b border-zinc-200 max-md:max-w-full">
       <button
-        onClick={() => setSelectedTab(TAB_STATE.ALL)}
+        onClick={() => handleTabClick(TAB_STATE.ALL)}
         className={`flex-1 shrink gap-0.5 self-stretch p-4 my-auto whitespace-nowrap bg-white min-w-[240px] text-neutral-900 ${
           selectedTab === TAB_STATE.ALL ? "border-b-2 border-zinc-900" : ""
         }`}
@@ -24,7 +32,7 @@ const TabNavigation = () => {
         전체
       </button>
       <button
-        onClick={() => setSelectedTab(TAB_STATE.CHECKED)}
+        onClick={() => handleTabClick(TAB_STATE.CHECKED)}
         className={`flex flex-1 shrink gap-0.5 justify-center items-start self-stretch p-4 my-auto bg-white basis-0 min-w-[240px] ${
           selectedTab === TAB_STATE.CHECKED ? "border-b-2 border-zinc-900" : ""
         }`}
@@ -33,7 +41,7 @@ const TabNavigation = () => {
         {/* <span className="flex shrink-0 w-1.5 h-1.5 bg-rose-500 rounded-[99px]" /> */}
       </button>
       <button
-        onClick={() => setSelectedTab(TAB_STATE.COMPLETED)}
+        onClick={() => handleTabClick(TAB_STATE.COMPLETED)}
         className={`flex-1 shrink gap-0.5 self-stretch p-4 my-auto whitespace-nowrap bg-white min-w-[240px] ${
           selectedTab === TAB_STATE.COMPLETED
             ? "border-b-2 border-zinc-900"
