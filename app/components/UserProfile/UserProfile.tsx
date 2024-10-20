@@ -1,10 +1,11 @@
 "use client";
 
+import { sendLog } from "@/app/logic/sendLog";
 import { getClientSideClient } from "@/app/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 type UserProfileProps = {
   user: User;
@@ -20,6 +21,13 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    sendLog("dashboard_view", {
+      created_at: new Date().toISOString(),
+      user_id: user.id,
+    });
+  }, []);
 
   return (
     <div className="flex overflow-hidden flex-wrap gap-10 justify-between items-center p-10 w-full bg-orange-100 rounded-2xl max-md:px-5 max-md:max-w-full">

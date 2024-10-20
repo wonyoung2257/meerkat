@@ -1,4 +1,5 @@
 "use client";
+import { sendLog } from "@/app/logic/sendLog";
 import { useQueryState } from "nuqs";
 
 const TAB_STATE = {
@@ -8,17 +9,18 @@ const TAB_STATE = {
   COMPLETED: "completed",
 } as const;
 
-const TabNavigation = () => {
+const TabNavigation = ({ userId }: { userId: string }) => {
   const [selectedTab, setSelectedTab] = useQueryState("tab", {
     defaultValue: TAB_STATE.ALL,
   });
 
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
-    if (typeof window.gtag === "function") {
-      console.log("tab_click", tab);
-      window.gtag("event", "tab_click", { tab });
-    }
+    sendLog("dashboard_tab_click", {
+      tab_title: tab,
+      created_at: new Date().toISOString(),
+      user_id: userId,
+    });
   };
 
   return (

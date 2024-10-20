@@ -1,16 +1,16 @@
 "use client";
 import { login } from "@/app/actions/login/actions";
-import React from "react";
+import { sendLog } from "@/app/logic/sendLog";
+import React, { useEffect } from "react";
 
 const LoginButton = () => {
+  useEffect(() => {
+    sendLog("login_page_view");
+  }, []);
+
   const handleLogin = async () => {
     try {
       await login();
-      if (typeof window.gtag === "function") {
-        window.gtag("event", "login", {
-          method: "Email", // 로그인 방법에 따라 변경 가능
-        });
-      }
     } catch (error) {
       console.error("로그인 중 오류 발생:", error);
     }

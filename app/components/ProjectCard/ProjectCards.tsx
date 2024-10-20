@@ -9,8 +9,10 @@ type Project = PRD;
 
 export const ProjectCards = ({
   projects: serverProjects,
+  userId,
 }: {
   projects: Project[];
+  userId: string;
 }) => {
   const supabase = getClientSideClient();
 
@@ -61,6 +63,7 @@ export const ProjectCards = ({
           <PrdCard
             key={project.id}
             {...project}
+            userId={userId}
             handleUpdateProject={handleUpdateProject}
           />
         ))

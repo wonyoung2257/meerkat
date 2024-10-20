@@ -46,8 +46,8 @@ const Dashboard: React.FC = async () => {
             내가 받은 기획서
           </h2>
           <div className="flex z-0 flex-col mt-10 w-full max-md:max-w-full">
-            <TabNavigation />
-            <ProjectCards projects={projects} />
+            <TabNavigation userId={user.user?.id} />
+            <ProjectCards projects={projects} userId={user.user?.id}/>
           </div>
         </section>
         <Footer />
