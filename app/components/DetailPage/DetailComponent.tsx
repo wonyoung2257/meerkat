@@ -5,8 +5,6 @@ import TabNavigation from "../TabNavigation/TabNavigation";
 import UserProfile from "../UserProfile/UserProfile";
 import { ProjectCards } from "../ProjectCard/ProjectCards";
 import Footer from "../Footer/Footer";
-import { logDashboardView } from "@/app/logic/logFunctions";
-import ViewLog from "../ViewLog/ViewLog";
 
 const Dashboard: React.FC = async () => {
   const supabase = getClient();
@@ -40,11 +38,6 @@ const Dashboard: React.FC = async () => {
 
   return (
     <>
-      <ViewLog
-        logFn={() => {
-          logDashboardView(user.user?.id);
-        }}
-      />
       <div className="flex overflow-hidden flex-col bg-white">
         <Header />
         <main className="flex flex-col self-center px-6 py-20 w-full max-w-[1200px] min-h-[958px] max-md:px-5 max-md:max-w-full gap-[60px]">
