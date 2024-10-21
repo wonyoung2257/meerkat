@@ -3,7 +3,7 @@ import { UserInfo } from "./UserInfo";
 import { getClientSideClient } from "@/app/utils/supabase/client";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 import { PRD } from "@/app/_types/prd.type";
-import { sendLog } from "@/app/logic/sendLog";
+import { logDashboardPrdClick } from "@/app/logic/logFunctions";
 
 type PrdCardProps = PRD & {
   handleUpdateProject: () => void;
@@ -40,12 +40,7 @@ export function PrdCard({
     user_id: string;
     prd_status: string;
   }) => {
-    sendLog("dashboard_prd_click", {
-      prd_id,
-      created_at: new Date().toISOString(),
-      user_id,
-      prd_status,
-    });
+    logDashboardPrdClick(user_id, prd_id, prd_status);
   };
 
   const handleClickCheck = async (e: React.MouseEvent<HTMLDivElement>) => {

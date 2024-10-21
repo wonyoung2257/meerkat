@@ -1,11 +1,11 @@
 "use client";
 import { login } from "@/app/actions/login/actions";
-import { sendLog } from "@/app/logic/sendLog";
+import { logLoginPageView } from "@/app/logic/logFunctions";
 import React, { useEffect } from "react";
 
 const LoginButton = () => {
   useEffect(() => {
-    sendLog("login_page_view");
+    logLoginPageView();
   }, []);
 
   const handleLogin = async () => {

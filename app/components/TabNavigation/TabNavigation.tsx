@@ -1,5 +1,5 @@
 "use client";
-import { sendLog } from "@/app/logic/sendLog";
+import { logDashboardTabClick } from "@/app/logic/logFunctions";
 import { useQueryState } from "nuqs";
 
 const TAB_STATE = {
@@ -16,11 +16,7 @@ const TabNavigation = ({ userId }: { userId: string }) => {
 
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
-    sendLog("dashboard_tab_click", {
-      tab_title: tab,
-      created_at: new Date().toISOString(),
-      user_id: userId,
-    });
+    logDashboardTabClick(userId, tab);
   };
 
   return (

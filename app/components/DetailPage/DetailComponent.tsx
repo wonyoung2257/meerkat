@@ -5,6 +5,8 @@ import TabNavigation from "../TabNavigation/TabNavigation";
 import UserProfile from "../UserProfile/UserProfile";
 import { ProjectCards } from "../ProjectCard/ProjectCards";
 import Footer from "../Footer/Footer";
+import { logDashboardView } from "@/app/logic/logFunctions";
+import ViewLog from "../ViewLog/ViewLog";
 
 const Dashboard: React.FC = async () => {
   const supabase = getClient();
@@ -37,22 +39,29 @@ const Dashboard: React.FC = async () => {
   }
 
   return (
-    <div className="flex overflow-hidden flex-col bg-white">
-      <Header />
-      <main className="flex flex-col self-center px-6 py-20 w-full max-w-[1200px] min-h-[958px] max-md:px-5 max-md:max-w-full gap-[60px]">
-        <UserProfile user={user.user} />
-        <section className="flex relative flex-col w-full leading-snug max-md:mt-10 max-md:max-w-full">
-          <h2 className="z-0 text-3xl font-semibold text-neutral-900">
-            내가 받은 기획서
-          </h2>
-          <div className="flex z-0 flex-col mt-10 w-full max-md:max-w-full">
-            <TabNavigation userId={user.user?.id} />
-            <ProjectCards projects={projects} userId={user.user?.id}/>
-          </div>
-        </section>
-        <Footer />
-      </main>
-    </div>
+    <>
+      <ViewLog
+        logFn={() => {
+          logDashboardView(user.user?.id);
+        }}
+      />
+      <div className="flex overflow-hidden flex-col bg-white">
+        <Header />
+        <main className="flex flex-col self-center px-6 py-20 w-full max-w-[1200px] min-h-[958px] max-md:px-5 max-md:max-w-full gap-[60px]">
+          <UserProfile user={user.user} />
+          <section className="flex relative flex-col w-full leading-snug max-md:mt-10 max-md:max-w-full">
+            <h2 className="z-0 text-3xl font-semibold text-neutral-900">
+              내가 받은 기획서
+            </h2>
+            <div className="flex z-0 flex-col mt-10 w-full max-md:max-w-full">
+              <TabNavigation userId={user.user?.id} />
+              <ProjectCards projects={projects} userId={user.user?.id} />
+            </div>
+          </section>
+          <Footer />
+        </main>
+      </div>
+    </>
   );
 };
 
