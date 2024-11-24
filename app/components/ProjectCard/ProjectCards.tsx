@@ -10,21 +10,28 @@ type Project = PRD;
 export const ProjectCards = ({
   projects: serverProjects,
   userId,
+  search,
 }: {
   projects: Project[];
   userId: string;
+  search: string;
 }) => {
   const supabase = getClientSideClient();
 
   const [projects, setProjects] = useState(serverProjects);
 
   const [selectedTab] = useQueryState("tab", { defaultValue: "all" });
-  const filteredProjects = projects.filter((project) => {
-    if (selectedTab === "all") return true;
-    if (selectedTab === "checked") return project.checked && !project.completed;
-    if (selectedTab === "completed") return project.completed;
-    return false;
-  });
+  const filteredProjects = projects
+    .filter((project) =>
+      project.title.toLowerCase().includes(search.toLowerCase())
+    )
+    .filter((project) => {
+      if (selectedTab === "all") return true;
+      if (selectedTab === "checked")
+        return project.checked && !project.completed;
+      if (selectedTab === "completed") return project.completed;
+      return false;
+    });
 
   const handleUpdateProject = async () => {
     try {
@@ -41,7 +48,6 @@ export const ProjectCards = ({
       if (userError) {
         throw userError;
       }
-
       setProjects(projects as Project[]);
     } catch (error) {
       console.error("Error updating project status:", error);
