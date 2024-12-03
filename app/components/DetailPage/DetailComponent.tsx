@@ -3,7 +3,8 @@ import { getClient } from "@/app/utils/supabase/server";
 import Header from "./Header";
 import UserProfile from "../UserProfile/UserProfile";
 import Footer from "../Footer/Footer";
-import { DetailBody } from "./DetailBody";
+import { PrdBoard } from "./PrdBoard";
+import { PrdProvider } from "../PrdProvider/PrdProvider";
 
 const Dashboard: React.FC = async () => {
   const supabase = getClient();
@@ -26,11 +27,17 @@ const Dashboard: React.FC = async () => {
     .eq("receiver", user.user?.email)
     .order("send_at", { ascending: false });
 
-  if (projectsError) {
+  const { data: sendPrd, error: sendPrdError } = await supabase
+    .from("prd")
+    .select("*")
+    .eq("sender_email", user.user?.email)
+    .order("send_at", { ascending: false });
+
+  if (projectsError || sendPrdError) {
     return (
       <div>
         프로젝트 데이터를 가져오는 중 오류가 발생했습니다:{" "}
-        {projectsError.message}
+        {projectsError?.message || sendPrdError?.message}
       </div>
     );
   }
@@ -40,9 +47,11 @@ const Dashboard: React.FC = async () => {
       <div className="flex overflow-hidden flex-col bg-white">
         <Header />
         <main className="flex flex-col self-center px-6 py-20 w-full max-w-[1200px] min-h-[958px] max-md:px-5 max-md:max-w-full gap-[60px]">
-          <UserProfile user={user.user} />
-          <DetailBody userId={user.user?.id} projects={projects} />
-          <Footer />
+          <PrdProvider projects={projects} sendPrd={sendPrd}>
+            <UserProfile user={user.user} />
+            <PrdBoard userId={user.user?.id} />
+            <Footer />
+          </PrdProvider>
         </main>
       </div>
     </>

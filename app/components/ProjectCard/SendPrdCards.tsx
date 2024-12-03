@@ -1,37 +1,16 @@
 "use client";
 import { PRD } from "@/app/_types/prd.type";
 import { useQueryState } from "nuqs";
-import { useState } from "react";
 import { getClientSideClient } from "@/app/utils/supabase/client";
 import { PrdCard } from "../PrdCard/PrdCard";
+import { usePrd } from "../PrdProvider/PrdProvider";
 
 type Project = PRD;
 
-export const ProjectCards = ({
-  projects: serverProjects,
-  userId,
-  search,
-}: {
-  projects: Project[];
-  userId: string;
-  search: string;
-}) => {
-  const supabase = getClientSideClient();
-
-  const [projects, setProjects] = useState(serverProjects);
-
+export const SendPrdCards = ({ userId }: { userId: string }) => {
   const [selectedTab] = useQueryState("tab", { defaultValue: "all" });
-  const filteredProjects = projects
-    .filter((project) =>
-      project.title.toLowerCase().includes(search.toLowerCase())
-    )
-    .filter((project) => {
-      if (selectedTab === "all") return true;
-      if (selectedTab === "checked")
-        return project.checked && !project.completed;
-      if (selectedTab === "completed") return project.completed;
-      return false;
-    });
+  const supabase = getClientSideClient();
+  const { filteredPrd, setPrd } = usePrd();
 
   const handleUpdateProject = async () => {
     try {
@@ -48,7 +27,7 @@ export const ProjectCards = ({
       if (userError) {
         throw userError;
       }
-      setProjects(projects as Project[]);
+      setPrd(projects as Project[]);
     } catch (error) {
       console.error("Error updating project status:", error);
     }
@@ -56,7 +35,7 @@ export const ProjectCards = ({
 
   return (
     <div className="flex flex-wrap gap-8 items-center mt-8 w-full max-md:max-w-full">
-      {filteredProjects.length === 0 ? (
+      {filteredPrd.length === 0 ? (
         <div className="flex justify-center items-center w-full h-full py-10">
           <p>
             {selectedTab === "completed"
@@ -65,7 +44,7 @@ export const ProjectCards = ({
           </p>
         </div>
       ) : (
-        filteredProjects.map((project: Project) => (
+        filteredPrd.map((project: Project) => (
           <PrdCard
             key={project.id}
             {...project}

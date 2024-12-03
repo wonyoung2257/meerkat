@@ -1,26 +1,35 @@
 "use client";
 
-import { PRD } from "@/app/_types/prd.type";
-import { ProjectCards } from "../ProjectCard/ProjectCards";
+import { ReceivedPrdCards } from "../ProjectCard/ReceivedPrdCards";
 import TabNavigation from "../TabNavigation/TabNavigation";
-import { useState } from "react";
+import { usePrd } from "../PrdProvider/PrdProvider";
+import { SendPrdCards } from "../ProjectCard/SendPrdCards";
 
-export const DetailBody = ({
-  userId,
-  projects,
-}: {
-  userId: string;
-  projects: PRD[];
-}) => {
-  const [search, setSearch] = useState("");
+export const PrdBoard = ({ userId }: { userId: string }) => {
+  const { prdType, setPrdType, setSearchKeyword } = usePrd();
 
   return (
     <section className="flex relative flex-col w-full leading-snug max-md:mt-10 max-md:max-w-full">
       <div className="flex items-center justify-between mb-10">
         {/* 제목 */}
-        <h2 className="text-3xl font-semibold text-neutral-900">
-          내가 받은 기획서
-        </h2>
+        <div className="flex gap-10">
+          <h2
+            className={`text-3xl font-semibold  cursor-pointer ${
+              prdType === "received" ? "text-neutral-900" : "text-[#81898F]"
+            }`}
+            onClick={() => setPrdType("received")}
+          >
+            내가 받은 기획서
+          </h2>
+          <h2
+            className={`text-3xl font-semibold  cursor-pointer ${
+              prdType === "sent" ? "text-neutral-900" : "text-[#81898F]"
+            }`}
+            onClick={() => setPrdType("sent")}
+          >
+            내가 보낸 기획서
+          </h2>
+        </div>
 
         {/* 검색바 */}
         <div className="flex items-center">
@@ -29,8 +38,7 @@ export const DetailBody = ({
               type="text"
               placeholder="제목 키워드로 검색해 보세요."
               className="w-[300px] px-4 py-2 pr-10 bg-white border rounded-full focus:outline-none focus:ring-1 focus:ring-gray-200"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => setSearchKeyword(e.target.value)}
             />
             <button className="absolute right-3">
               <svg
@@ -53,7 +61,11 @@ export const DetailBody = ({
       {/* TabNavigation 및 ProjectCards */}
       <div className="flex z-0 flex-col mt-10 w-full max-md:max-w-full">
         <TabNavigation userId={userId} />
-        <ProjectCards projects={projects} userId={userId} search={search} />
+        {prdType === "received" ? (
+          <ReceivedPrdCards userId={userId} />
+        ) : (
+          <SendPrdCards userId={userId} />
+        )}
       </div>
     </section>
   );

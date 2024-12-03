@@ -8,5 +8,6 @@ export type PRD = {
   completed: boolean;
   update_at: Date;
   sender: string;
+  sender_email: string;
   eta: Date;
 };
